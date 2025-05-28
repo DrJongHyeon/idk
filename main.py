@@ -15,11 +15,10 @@ df = load_data()
 st.write("### 데이터 미리보기", df.head())
 
 # 컬럼 선택
-categorical_cols = df.select_dtypes(include='object').columns.tolist()
-numeric_cols = df.select_dtypes(include='number').columns.tolist()
+all_columns = df.columns.tolist()
 
-x_axis = st.selectbox("X축 (카테고리)", categorical_cols)
-y_axis = st.selectbox("Y축 (숫자값)", numeric_cols)
+x_axis = st.selectbox("X축 컬럼 선택", all_columns)
+y_axis = st.selectbox("Y축 (숫자값)", df.select_dtypes(include='number').columns.tolist())
 
 # 막대그래프 그리기
 fig = px.bar(df, x=x_axis, y=y_axis, title=f"{x_axis}별 {y_axis} 막대그래프")
